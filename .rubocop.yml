@@ -1,0 +1,31 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-capybara
+
+AllCops:
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'bin/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'bin/*'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'bin/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/environments/*'
+
+Layout/LineLength:
+  Exclude:
+    - 'bin/*'
+    - 'config/initializers/*'
