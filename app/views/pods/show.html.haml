@@ -1,0 +1,18 @@
+%h1
+  Pod information
+%h2
+  = pod.date
+  = link_to 'Edit', edit_pod_path(pod)
+
+%h3
+  Pod results
+%ul
+  - pod.pod_results.each do |pod_result|
+    %li
+      = pod_result.user.full_name
+      %p
+        Place:
+        = pod_result.place
+      %p
+        Score:
+        = pod_result.score

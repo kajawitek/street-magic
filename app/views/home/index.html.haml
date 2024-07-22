@@ -1,1 +1,12 @@
-%h  Hello!
+= form_with url: new_pod_path, method: :get do |f|
+  = f.label :number_of_players, 'Enter number of players:'
+  = f.number_field :number_of_players, min: 3, value: 4
+  = f.submit 'Add New Pod'
+
+%h1
+  = link_to 'List of all pods', pods_path
+%h1
+  Results per user
+  - users.each do |user|
+    %li
+      User name: #{user.full_name} Total score: #{user.pod_results.sum(:score)}

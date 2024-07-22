@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_10_121304) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_18_101822) do
   create_table "leagues", force: :cascade do |t|
     t.integer "year", null: false
     t.datetime "created_at", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_10_121304) do
     t.integer "user_id", null: false
     t.integer "pod_id", null: false
     t.integer "place", null: false
-    t.integer "points", null: false
+    t.integer "score", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pod_id"], name: "index_pod_results_on_pod_id"

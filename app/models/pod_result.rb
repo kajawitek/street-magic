@@ -4,5 +4,5 @@ class PodResult < ApplicationRecord
   belongs_to :user
   belongs_to :pod
 
-  validates :place, :points, presence: true
+  validates :place, :score, presence: true
 end
