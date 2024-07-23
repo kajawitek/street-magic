@@ -7,6 +7,6 @@
   = link_to 'List of all pods', pods_path
 %h1
   Results per user
-  - users.each do |user|
+  - sorted_users.each do |user|
     %li
       User name: #{user.full_name} Total score: #{user.pod_results.sum(:score)}

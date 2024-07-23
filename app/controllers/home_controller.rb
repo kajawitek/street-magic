@@ -2,8 +2,10 @@
 
 class HomeController < ApplicationController
   def index
-    users = User.all
+    sorted_users = User.joins(:pod_results)
+                       .group('users.id')
+                       .order('SUM(pod_results.score) DESC')
 
-    render :index, locals: { users: }
+    render :index, locals: { sorted_users: }
   end
 end
