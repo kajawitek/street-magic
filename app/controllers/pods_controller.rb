@@ -28,7 +28,7 @@ class PodsController < ApplicationController
   end
 
   def create # rubocop: disable Metrics/AbcSize
-    league = League.find_or_create_by(year: Date.current.year)
+    league = League.find_or_create_by(year: Time.zone.now.year)
     pod = league.pods.new(pod_params)
 
     pod.pod_results.each do |result|
@@ -36,13 +36,13 @@ class PodsController < ApplicationController
     end
 
     if pod.save
-      redirect_to root_path, notice: 'Pod was successfully created. Add results'
+      redirect_to pod, notice: 'Pod was successfully created. Add results'
     else
       render :new, status: :unprocessable_entity, locals: { pod: }
     end
   end
 
-  def update # rubocop: disable Metrics/AbcSize
+  def update
     pod = Pod.find(params[:id])
 
     if pod.update(pod_params)
@@ -51,7 +51,7 @@ class PodsController < ApplicationController
       end
       pod.save
 
-      redirect_to pods_path, notice: 'Pod was successfully updated.'
+      redirect_to pod, notice: 'Pod was successfully updated.'
     else
       render :edit, status: :unprocessable_entity, locals: { pod: }
     end

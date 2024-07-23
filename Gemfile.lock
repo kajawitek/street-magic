@@ -110,6 +110,13 @@ GEM
     diff-lcs (1.5.1)
     drb (2.2.1)
     erubi (1.13.0)
+    factory_bot (6.4.6)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     haml (6.3.0)
@@ -275,6 +282,12 @@ GEM
     rubocop-rspec (3.0.2)
       rubocop (~> 1.61)
     ruby-progressbar (1.13.0)
+    rubyzip (2.3.2)
+    selenium-webdriver (4.19.0)
+      base64 (~> 0.2)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -322,6 +335,7 @@ GEM
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
     webrick (1.8.1)
+    websocket (1.2.10)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -342,6 +356,8 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
+  factory_bot_rails (~> 6.4)
+  faker
   haml-rails (~> 2.0)
   importmap-rails
   jbuilder
@@ -352,6 +368,7 @@ DEPENDENCIES
   rubocop-capybara
   rubocop-rails
   rubocop-rspec
+  selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
