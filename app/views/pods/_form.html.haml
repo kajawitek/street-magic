@@ -1,13 +1,22 @@
 = form_with model: pod do |form|
+  - if pod.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(pod.errors.count, "error") + " prohibited this pod from being saved:"
+      %ul
+        - pod.errors.full_messages.each do |message|
+          %li= message
+
   = form.label :date
   = form.date_field :date
 
-  %p
-    = form.fields_for :pod_results do |pod_result_fields|
-      = pod_result_fields.label :user
-      = pod_result_fields.select :user_id, User.all.collect { |u| [u.full_name, u.id] }, include_blank: true
-      = pod_result_fields.label :place
-      = pod_result_fields.number_field :place
+  - pod.pod_results.each_with_index do |pod_result, index|
+    .nested-fields
+      = form.fields_for :pod_results, pod_result do |pod_result_fields|
+        = pod_result_fields.label :user
+        = pod_result_fields.select :user_id, User.all.collect { |u| [u.full_name, u.id] }, include_blank: true
+        = pod_result_fields.label :place
+        = pod_result_fields.number_field :place
 
   %p
     = form.submit

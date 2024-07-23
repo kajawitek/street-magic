@@ -32,13 +32,13 @@ class PodsController < ApplicationController
     pod = league.pods.new(pod_params)
 
     pod.pod_results.each do |result|
-      result.score = pod.pod_results.size - result.place + 1
+      result.score = pod.pod_results.size - result.place + 1 unless result.place.nil?
     end
 
     if pod.save
       redirect_to root_path, notice: 'Pod was successfully created. Add results'
     else
-      render :new, locals: { pod: }, notice: 'Pod not created.'
+      render :new, status: :unprocessable_entity, locals: { pod: }
     end
   end
 
@@ -53,7 +53,7 @@ class PodsController < ApplicationController
 
       redirect_to pods_path, notice: 'Pod was successfully updated.'
     else
-      render :edit, locals: { pod: }
+      render :edit, status: :unprocessable_entity, locals: { pod: }
     end
   end
 

@@ -1,6 +1,6 @@
 = form_with url: new_pod_path, method: :get do |f|
   = f.label :number_of_players, 'Enter number of players:'
-  = f.number_field :number_of_players, min: 3, value: 4
+  = f.number_field :number_of_players, min: 3, value: 4, required: true
   = f.submit 'Add New Pod'
 
 %h1
