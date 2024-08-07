@@ -27,13 +27,10 @@ class PodsController < ApplicationController
     render :edit, locals: { pod: }
   end
 
-  def create # rubocop: disable Metrics/AbcSize
+  def create
     league = League.find_or_create_by(year: Time.zone.now.year)
     pod = league.pods.new(pod_params)
-
-    pod.pod_results.each do |result|
-      result.score = pod.pod_results.size - result.place + 1 unless result.place.nil?
-    end
+    Pods::CalculateResults.new(pod).call
 
     if pod.save
       redirect_to pod, notice: 'Pod was successfully created. Add results'
@@ -46,9 +43,7 @@ class PodsController < ApplicationController
     pod = Pod.find(params[:id])
 
     if pod.update(pod_params)
-      pod.pod_results.each do |result|
-        result.score = pod.pod_results.size - result.place + 1
-      end
+      Pods::CalculateResults.new(pod).call
       pod.save
 
       redirect_to pod, notice: 'Pod was successfully updated.'
