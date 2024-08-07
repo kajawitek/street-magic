@@ -1,10 +1,29 @@
 = form_with url: new_pod_path, method: :get do |f|
-  = f.label :number_of_players, 'Enter number of players:'
-  = f.number_field :number_of_players, min: 3, value: 4, required: true
-  = f.submit 'Add New Pod'
+  .flex.items-center.space-x-4
+    = f.label :number_of_players, 'Enter number of players:', class: 'block mb-2 text-sm font-medium text-gray-900 whitespace-nowrap'
+    = f.number_field :number_of_players, min: 3, value: 4, required: true, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+    = f.submit 'Add New Pod', class: 'text-white bg-gray-700 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
 
-%h1
-  Results per user
-  - sorted_users.each do |user|
-    %li
-      User name: #{user.full_name} Total score: #{user.pod_results.sum(:score)}
+%h1.text-2xl.font-bold.my-4 Players Statistics
+.relative.overflow-x-auto.my-10
+  %table.w-full.text-sm.text-left.rtl
+    %thead.text-xs.text-gray-700.uppercase.bg-gray-50
+      %tr
+        %th.px-6.py-3 Player
+        %th.px-6.py-3 Total score
+        %th.px-6.py-3 Number of wins
+        %th.px-6.py-3 Number of games played
+        %th.px-6.py-3 Average points per game
+        %th.px-6.py-3 Win Rate
+        %th.px-6.py-3 Laplace's rule of succession
+    %tbody
+      - sorted_users.each do |user|
+        - stats = user_statistics[user.id]
+        %tr.bg-white.border-b
+          %td.px-6.py-4= stats[:full_name]
+          %td.px-6.py-4= stats[:total_score]
+          %td.px-6.py-4= stats[:number_of_wins]
+          %td.px-6.py-4= stats[:number_of_played_games]
+          %td.px-6.py-4= number_with_precision(stats[:average_points], precision: 2)
+          %td.px-6.py-4= number_to_percentage(stats[:win_rate], precision: 2)
+          %td.px-6.py-4= number_to_percentage(stats[:laplace_succession], precision: 2)
