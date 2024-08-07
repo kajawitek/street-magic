@@ -10,6 +10,7 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    %main.container.mx-auto.mt-28.px-5
+    = render 'layouts/header'
+    %main.container.mx-auto.mt-12.px-12
       %p.notice= notice
       = yield

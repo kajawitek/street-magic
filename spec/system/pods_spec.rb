@@ -34,7 +34,7 @@ RSpec.describe 'Pods', type: :system do
     login_as(pod.users.first, scope: :user)
 
     visit root_path
-    click_on 'List of all pods'
+    click_on 'Pods'
     click_on pod.date
     click_on 'Edit'
 
